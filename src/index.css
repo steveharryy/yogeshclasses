@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-scroll-left-to-right {
+    animation: scrollLeftToRight 20s linear infinite;
+  }
+
+  .animate-scroll-right-to-left {
+    animation: scrollRightToLeft 22s linear infinite;
+  }
+
+  .animate-scroll-left-to-right:hover,
+  .animate-scroll-right-to-left:hover {
+    animation-play-state: paused;
+  }
+
+  .animate-fade-in-slow {
+    animation: fadeInSlow 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-flash-badge {
+    animation: flashBadge 2s ease-in-out infinite;
+  }
+}
+
+@keyframes scrollLeftToRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes scrollRightToLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes fadeInSlow {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flashBadge {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(217, 119, 6, 0.3), 0 0 40px rgba(217, 119, 6, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(217, 119, 6, 0.6), 0 0 80px rgba(217, 119, 6, 0.4);
+  }
+}
