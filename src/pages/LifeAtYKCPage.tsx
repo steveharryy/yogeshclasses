@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Camera, Heart, Sparkles, Users, ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Camera, Heart, Sparkles, Users, ArrowLeft, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
@@ -90,6 +90,49 @@ const spotlightImages = [
 
 const LifeAtYKCPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentGallery, setCurrentGallery] = useState<'spotlight' | 'classroom' | 'rewind' | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const galleryMap = {
+    spotlight: spotlightImages,
+    classroom: classroomImages,
+    rewind: rewindImages,
+  };
+
+  const openImage = (img: string, gallery: 'spotlight' | 'classroom' | 'rewind') => {
+    setSelectedImage(img);
+    setCurrentGallery(gallery);
+    const index = galleryMap[gallery].indexOf(img);
+    setCurrentIndex(index);
+  };
+
+  const handlePrevious = () => {
+    if (!currentGallery) return;
+    const gallery = galleryMap[currentGallery];
+    const newIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+    setCurrentIndex(newIndex);
+    setSelectedImage(gallery[newIndex]);
+  };
+
+  const handleNext = () => {
+    if (!currentGallery) return;
+    const gallery = galleryMap[currentGallery];
+    const newIndex = (currentIndex + 1) % gallery.length;
+    setCurrentIndex(newIndex);
+    setSelectedImage(gallery[newIndex]);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedImage) return;
+      if (e.key === 'ArrowLeft') handlePrevious();
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'Escape') setSelectedImage(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, currentGallery, currentIndex]);
 
   return (
     <div className="pt-16">
@@ -145,7 +188,7 @@ const LifeAtYKCPage: React.FC = () => {
               <div
                 key={`spotlight-${index}`}
                 className="aspect-square rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer overflow-hidden"
-                onClick={() => setSelectedImage(img)}
+                onClick={() => openImage(img, 'spotlight')}
               >
                 <img
                   src={img}
@@ -175,7 +218,7 @@ const LifeAtYKCPage: React.FC = () => {
               <div
                 key={`classroom-${index}`}
                 className="aspect-square rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer overflow-hidden"
-                onClick={() => setSelectedImage(img)}
+                onClick={() => openImage(img, 'classroom')}
               >
                 <img
                   src={img}
@@ -206,7 +249,7 @@ const LifeAtYKCPage: React.FC = () => {
               <div
                 key={`rewind-${index}`}
                 className="aspect-square rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer overflow-hidden"
-                onClick={() => setSelectedImage(img)}
+                onClick={() => openImage(img, 'rewind')}
               >
                 <img
                   src={img}
@@ -298,7 +341,7 @@ const LifeAtYKCPage: React.FC = () => {
       {/* LIGHTBOX MODAL */}
       {selectedImage && (
         <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
-          <div className="relative max-w-4xl max-h-full">
+          <div className="relative max-w-4xl max-h-full w-full">
 
             {/* Close Button */}
             <button
@@ -309,12 +352,37 @@ const LifeAtYKCPage: React.FC = () => {
               <X className="h-8 w-8" />
             </button>
 
+            {/* Previous Arrow */}
+            <button
+              onClick={handlePrevious}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 text-white hover:text-amber-400 transition-colors duration-200 z-10"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="h-12 w-12" />
+            </button>
+
             {/* Image */}
             <img
               src={selectedImage}
               alt="Gallery"
               className="max-w-full max-h-[80vh] object-contain rounded-lg"
             />
+
+            {/* Next Arrow */}
+            <button
+              onClick={handleNext}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 text-white hover:text-amber-400 transition-colors duration-200 z-10"
+              aria-label="Next image"
+            >
+              <ChevronRight className="h-12 w-12" />
+            </button>
+
+            {/* Image Counter */}
+            {currentGallery && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm font-medium">
+                {currentIndex + 1} / {galleryMap[currentGallery].length}
+              </div>
+            )}
           </div>
         </div>
       )}
