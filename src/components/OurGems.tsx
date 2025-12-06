@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import aman from '../photos/aman.png';
-import shivam from '../photos/shivam.jpg';
+import shivam from '../photos/img-20240226-wa0001_(1).jpg';
 import topperBanner from '../photos/WEBSITE BANNER.jpg';
 import { Trophy, Star, Medal, Users, GraduationCap } from 'lucide-react';
 

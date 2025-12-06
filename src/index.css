@@ -4,11 +4,11 @@
 
 @layer utilities {
   .animate-scroll-left-to-right {
-    animation: scrollLeftToRight 20s linear infinite;
+    animation: scrollLeftToRight 12s linear infinite;
   }
 
   .animate-scroll-right-to-left {
-    animation: scrollRightToLeft 22s linear infinite;
+    animation: scrollRightToLeft 14s linear infinite;
   }
 
   .animate-scroll-left-to-right:hover,

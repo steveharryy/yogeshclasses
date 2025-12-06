@@ -110,22 +110,7 @@ const Results: React.FC = () => {
 
       <div className="p-4">
         <h4 className="text-sm font-bold text-gray-900 dark:text-white mb-1">{achiever.name}</h4>
-        <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">{achiever.school}</p>
-        <div className="flex flex-wrap gap-1 mb-2">
-          {achiever.subjects.map((subject: string) => (
-            <span
-              key={subject}
-              className="text-xs bg-amber-100 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full"
-            >
-              {subject}
-            </span>
-          ))}
-        </div>
-        <div className="flex items-center space-x-0.5">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-2.5 w-2.5 fill-amber-400 text-amber-400" />
-          ))}
-        </div>
+        <p className="text-xs text-gray-600 dark:text-gray-400">{achiever.school}</p>
       </div>
     </div>
   );
@@ -134,27 +119,6 @@ const Results: React.FC = () => {
     <section id="results" className="py-16 bg-white dark:bg-slate-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* CBSE Results 2023-24 */}
-        <div className="mb-20">
-          <h3 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
-            CBSE Results <span className="bg-gradient-to-r from-amber-400 to-rose-500 bg-clip-text text-transparent">2023-24</span>
-          </h3>
-
-          <div className="overflow-hidden">
-            <div className="flex animate-scroll-left-to-right">
-              {[...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24].map((achiever, index) => (
-                <ReviewCard
-                  key={`2023-${achiever.id}-${index}`}
-                  achiever={achiever}
-                  isHovered={hoveredCard === `2023-${achiever.id}-${index}`}
-                  onHover={() => setHoveredCard(`2023-${achiever.id}-${index}`)}
-                  onLeave={() => setHoveredCard(null)}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* CBSE Results 2024-25 */}
         <div className="mb-20">
           <h3 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
@@ -162,13 +126,34 @@ const Results: React.FC = () => {
           </h3>
 
           <div className="overflow-hidden">
-            <div className="flex animate-scroll-right-to-left">
+            <div className="flex animate-scroll-left-to-right">
               {[...achieversData2024_25, ...achieversData2024_25, ...achieversData2024_25, ...achieversData2024_25, ...achieversData2024_25, ...achieversData2024_25, ...achieversData2024_25, ...achieversData2024_25].map((achiever, index) => (
                 <ReviewCard
                   key={`2024-${achiever.id}-${index}`}
                   achiever={achiever}
                   isHovered={hoveredCard === `2024-${achiever.id}-${index}`}
                   onHover={() => setHoveredCard(`2024-${achiever.id}-${index}`)}
+                  onLeave={() => setHoveredCard(null)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* CBSE Results 2023-24 */}
+        <div className="mb-20">
+          <h3 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+            CBSE Results <span className="bg-gradient-to-r from-amber-400 to-rose-500 bg-clip-text text-transparent">2023-24</span>
+          </h3>
+
+          <div className="overflow-hidden">
+            <div className="flex animate-scroll-right-to-left">
+              {[...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24, ...achieversData2023_24].map((achiever, index) => (
+                <ReviewCard
+                  key={`2023-${achiever.id}-${index}`}
+                  achiever={achiever}
+                  isHovered={hoveredCard === `2023-${achiever.id}-${index}`}
+                  onHover={() => setHoveredCard(`2023-${achiever.id}-${index}`)}
                   onLeave={() => setHoveredCard(null)}
                 />
               ))}

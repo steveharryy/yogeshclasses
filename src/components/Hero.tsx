@@ -49,11 +49,11 @@ const Hero: React.FC = () => {
                     />
                     <div
                       onClick={() => window.open("https://wa.me/919213092876?text=Hi%20I%20want%20to%20book%20a%20demo", "_blank")}
-                      className="absolute -bottom-4 -right-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 rounded-xl p-4 shadow-2xl border-4 border-slate-900 cursor-pointer transition-all duration-300 hover:scale-105"
+                      className="absolute -bottom-4 -right-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 rounded-xl p-4 shadow-2xl border-4 border-slate-900 cursor-pointer transition-all duration-300 hover:scale-105 animate-bounce-slow"
                     >
                       <div className="text-center">
-                        <div className="text-lg font-bold text-white">Book a</div>
-                        <div className="text-lg font-bold text-white">Free Demo</div>
+                        <div className="text-lg font-bold text-white animate-pulse">Book a</div>
+                        <div className="text-lg font-bold text-white animate-pulse">Free Demo</div>
                       </div>
                     </div>
                   </div>

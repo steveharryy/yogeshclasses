@@ -129,7 +129,7 @@ const navItems: NavItem[] = [
               <img
                 src={logo}
                 alt="YKC Logo"
-                className="h-16 w-auto object-contain"
+                className="h-20 w-auto object-contain brightness-110 contrast-125 filter drop-shadow-lg"
               />
             </Link>
           </div>
